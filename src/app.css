@@ -1,0 +1,23 @@
+:root {
+  --primary: #5164BF;
+  --secondary:#DBE3F8;
+  --charge:#EAF5DC;
+  --discharge:#FFDEE2;
+  --gray:#c6c6c6;
+  --radius: 20px;
+}
+.primary{
+  background-color: var(--primary);
+}
+.secondary{
+  background-color: var(--secondary);
+}
+.charge{
+  background-color: var(--charge);
+}
+.discharge{
+  background-color: var(--discharge);
+}
+.rad{
+  border-radius: var(--radius);
+}
