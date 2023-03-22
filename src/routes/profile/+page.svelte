@@ -1,7 +1,7 @@
 <script>
-	import BackBtn from "../../components/backButton/BackBtn.svelte";
-	import Nav from "../../components/nav/nav.svelte";
-	import SettingItem from "../../components/settingItem/SettingItem.svelte";
+	import BackBtn from "$lib/components/backButton/BackBtn.svelte";
+	import Nav from "$lib/components/nav/Nav.svelte";
+	import SettingItem from "$lib/components/settingItem/SettingItem.svelte";
     import Language from  "$lib/assets/language.svg"
     import Key from  "$lib/assets/key.svg"
     import Gear from  "$lib/assets/gear.svg"

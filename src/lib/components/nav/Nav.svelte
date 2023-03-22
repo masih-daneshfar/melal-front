@@ -32,6 +32,8 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        background-color: white;
+        z-index: 100;
         
     }
     nav a{
