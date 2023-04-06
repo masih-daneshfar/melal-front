@@ -14,22 +14,23 @@
         <img src={Home} alt="profile">
         <span>خانه</span>
     </a>
-    <a href="/stock">
+    <a href="/stocks">
         <img src={Stock} alt="profile">
         <span>سهام</span>
     </a>
   </nav> 
 
-<style>
+<style lang="scss">
     nav{
         width: 80%;
+        height: 8vh;
         position: fixed;
         bottom: 10px;
-        left: 0;
-        margin-left: 6%;
+        inset-inline: 7%;
         border: 1px solid #C1B1B1;
         padding: 5px 15px;
         display: flex;
+        flex-direction: row-reverse;
         align-items: center;
         justify-content: space-between;
         background-color: white;
@@ -44,6 +45,7 @@
         align-items: center;
         justify-content: space-between;
         padding: 2px;
+        transform: scale(0.65);
     }
   
 </style>

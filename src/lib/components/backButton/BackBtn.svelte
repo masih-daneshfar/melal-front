@@ -9,8 +9,8 @@
 
 <style>
     a{
-        width: 65px;
-        height: 45px;
+        width: 55px;
+        height: 35px;
         background-color: var(--primary);
         display: flex;
         align-items: center;

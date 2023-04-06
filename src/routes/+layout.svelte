@@ -1,8 +1,24 @@
 <script>
-  import '../app.css'
+  import '../app.css';
+    import { page } from '$app/stores';
+
+  import {screenLockStore} from "$lib/store/screenLock.store.js";
+	import { onMount } from 'svelte';
+  let url;
+  onMount(() => {
+    url = window.location.pathname
+     if ($screenLockStore===true && url!=='/screenlock'  ) {
+      window.location.pathname='/screenlock'
+    }
+  });
+
+  $:{
+   
+  }
+
 </script>
 
-
+{url}
 <div class="container "><slot></slot></div>
 <style>
   .container{

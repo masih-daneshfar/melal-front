@@ -9,7 +9,7 @@
     <div class="arrow">
         <img src={Left} alt="left">
     </div>
-    <div class="title"><h3>{title}</h3></div>
+    <div class="title"><h4>{title}</h4></div>
     <div class="icon">
         <img src={image} alt="icon">
     </div>
@@ -18,28 +18,39 @@
 <style>
     .container{
         width: 100%;
-        height: 15%;
+        height: 65px;
         display: flex;
+        flex-direction: row-reverse;
         align-items: center;
         justify-content: space-between;
-        border-bottom: 2px solid var(--gray);
+        /* border-bottom: 1px solid var(--gray); */
+        padding-inline: 10px;
+        box-sizing: border-box;
     }
     .container .arrow{
-        width: 15%;
+        width: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    .container .arrow img{
+        max-width: 100%;
+        height: 15px;
     }
 
     .container .title{
-        width: 65%;
+        width: 75%;
         display: flex;
-        justify-content: flex-end;
+        justify-content: flex-start;
     }
     .container .icon{
-        width: 20%;
+        width: 30px;
         display: flex;
+
         justify-content: center;
+    }
+    .container .icon img{
+        max-width: 100%;
     }
 
 </style>

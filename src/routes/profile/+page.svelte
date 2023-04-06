@@ -21,9 +21,11 @@
             <h3>نوید بیاتی</h3>
             <span>@navid1376</span>
         </div>
-        <div class="insider-right">
+         <div class="insider-right">
             <div class="letter-box primary"><h2>N</h2></div>
         </div>
+        
+       
     </div>
 <BackBtn ref='/'/>
 </div>
@@ -65,7 +67,7 @@
         height: 50%;
         margin-block-end: 20px;
         display: flex;
-        flex-direction: row;
+        flex-direction: row-reverse;
         align-items: center;
         justify-content: flex-end;
     }
@@ -74,7 +76,7 @@
         height: 70px;
         display: flex;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: flex-start;
     }
     .insider-right .letter-box{
         width: 70px;
@@ -90,14 +92,15 @@
         height: max-content;
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
+        align-items: flex-start;
     }
     .insider-left h3{
         padding: 0;
         margin: 0;
     }
     .insider-left span{
-        font-size: x-small;
+        direction: ltr;
+        font-size: small;
         padding-top: 8px;
     
     }
