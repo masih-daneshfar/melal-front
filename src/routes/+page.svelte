@@ -9,7 +9,7 @@
 		{ type: 'charge', date: new Date(), fee: 525500000 },
 		{ type: 'transact', date: new Date(), fee: 2000000 }
 	];
-	
+
 	const getRecentTransactions = async () => {
 		// const data= await fetch('/transactions').then(res=>res.json())
 		return new Promise((resolve, reject) => {

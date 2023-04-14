@@ -1,12 +1,11 @@
 <script>
 	export let cardNum;
 	export let cardExp;
-	import {fetcher} from '$lib/utils/fetcher' 
-	const balanceApi=async()=>{
-		const data=await fetcher('/balance');
-	}
-	const getBalance=balanceApi();
-	
+	import { fetcher } from '$lib/utils/fetcher';
+	const balanceApi = async () => {
+		const data = await fetcher('/balance');
+	};
+	const getBalance = balanceApi();
 </script>
 
 <div class="card-container">
@@ -20,9 +19,9 @@
 	<div class="balance-value">
 		{#await getBalance}
 			loading...
-		{:then data } 
-		<span>{data.result.toLocaleString('fa-IR')} ریال</span>
-			{:catch}
+		{:then data}
+			<span>{data.result.toLocaleString('fa-IR')} ریال</span>
+		{:catch}
 			Error!
 		{/await}
 	</div>
