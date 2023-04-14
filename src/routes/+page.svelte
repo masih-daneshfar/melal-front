@@ -9,20 +9,36 @@
 		{ type: 'charge', date: new Date(), fee: 525500000 },
 		{ type: 'transact', date: new Date(), fee: 2000000 }
 	];
+	
+	const getRecentTransactions = async () => {
+		// const data= await fetch('/transactions').then(res=>res.json())
+		return new Promise((resolve, reject) => {
+			setTimeout(() => {
+				resolve({
+					data: api
+				});
+			}, 1000);
+		});
+	};
 	let cardInfo = {
 		cardNum: 6062512367493245,
 		expDate: '1402/6',
 		balance: 125525450
 	};
+	const getRecentTransactionsRequest = getRecentTransactions();
 </script>
 
 <Card cardNum={cardInfo.cardNum} cardExp={cardInfo.expDate} cardBalance={cardInfo.balance} />
 <Menu />
 <div class="container">
 	<div class="transaction-container">
-		{#each api as api}
-			<TransactionRecord type={api.type} date={api.date} fee={api.fee} />
-		{/each}
+		{#await getRecentTransactionsRequest}
+			loading
+		{:then { data }}
+			{#each data as api}
+				<TransactionRecord type={api.type} date={api.date} fee={api.fee} />
+			{/each}
+		{/await}
 	</div>
 </div>
 <Nav />
