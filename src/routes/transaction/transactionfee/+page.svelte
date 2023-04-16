@@ -1,19 +1,27 @@
 <script>
 	import BackBtn from '$lib/components/backButton/BackBtn.svelte';
+	import { transferStore } from '$lib/store/transfer.store';
+	import { goto } from '$app/navigation';
+	let amount;
+
+	const gotoTransferConfirm = () => {
+		transferStore.set({ ...$transferStore, amount });
+		goto(`/transaction/transactionconfirm`, { replaceState: true });
+	};
 </script>
 
 <div class="header-container">
 	<BackBtn ref="/transaction/destinationinfo" />
 	<h2>انتقال</h2>
 </div>
-<form class="input-container">
+<form class="input-container" on:submit|preventDefault={gotoTransferConfirm}>
 	<span>مبلغ مورد نظر :</span>
 	<div class="destcard">
 		<strong>ریال</strong>
-		<input class="feeInp" type="number" pattern="\d*" />
+		<input class="feeInp" type="number" pattern="\d*" bind:value={amount} />
 	</div>
 	<!-- <button type="submit">ادامه</button> -->
-	<a class="primary" href="transactionconfirm">ادامه</a>
+	<button class="primary" type="submit">ادامه</button>
 </form>
 
 <style>
@@ -48,13 +56,15 @@
 		align-items: center;
 		justify-content: center;
 	}
-	.input-container a {
+	.input-container button {
 		padding: 8px 40px;
 		margin-inline: auto;
 		border-radius: 20px;
 		text-decoration: none;
 		color: white;
 		margin-block: 30px;
+		border: none;
+		outline: none;
 	}
 	.feeInp {
 		width: 100%;

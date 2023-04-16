@@ -1,33 +1,58 @@
 <script>
 	import BackBtn from '$lib/components/backButton/BackBtn.svelte';
 	import profile from '$lib/assets/profileC.svg';
+	import { fetcher } from '$lib/utils/fetcher';
+	import { transferStore } from '$lib/store/transfer.store';
+	import { goto } from '$app/navigation';
+
+	let data;
+	transferStore.subscribe((value) => {
+		data = { ...value };
+	});
+	const getTransferRecipientDetails = async () => {
+		return fetcher('/transfer', data);
+	};
+	const getTransferConfirmation = async () => {
+		await fetcher('/transfer/confirm', data);
+		goto('/');
+	};
+
+	const getTranserReciepientDetailsRequest = getTransferRecipientDetails();
 </script>
 
 <div class="header-container">
 	<BackBtn ref="/transaction/destinationinfo" />
 	<h2>انتقال</h2>
 </div>
-<div class="details-container">
-	<img src={profile} alt="user" />
-	<span>امیرعلی کفاشی</span>
-	<p class="cardNumber"><span>1234</span><span>5678</span><span>9101</span><span>1122</span></p>
-	<p class="fees">
-		<strong>{Number(200_000).toLocaleString('fa-IR')}</strong>
-		<strong>ریال</strong>
-	</p>
-</div>
-<hr />
-
-<strong class="payfrom">پرداخت از :</strong>
-<div class="card-container">
-	<div class="shape"><span /></div>
-	<div class="content">
-		<p><strong>حساب ملل کارت</strong></p>
-		<p><span>موجودی : {Number(200_000).toLocaleString('fa-IR')}</span></p>
+{#await getTranserReciepientDetailsRequest}
+	loading
+{:then data}
+	<div class="details-container">
+		<img src={profile} alt="user" />
+		<span>{data.destUser.cardHolder}</span>
+		<p class="cardNumber">
+			{#each String(data.destUser.cardNum).match(/.{1,4}/g) as numbers}
+				<span>{numbers}</span>
+			{/each}
+		</p>
+		<p class="fees">
+			<strong>{Number($transferStore.amount).toLocaleString('fa-IR')}</strong>
+			<strong>ریال</strong>
+		</p>
 	</div>
-</div>
+	<hr />
 
-<button on:click={() => alert()}>تایید و انتقال</button>
+	<strong class="payfrom">پرداخت از :</strong>
+	<div class="card-container">
+		<div class="shape"><span /></div>
+		<div class="content">
+			<p><strong>حساب ملل کارت</strong></p>
+			<p><span>موجودی : {Number(data.balance).toLocaleString('fa-IR')}</span></p>
+		</div>
+	</div>
+
+	<button on:click={() => getTransferConfirmation()}>تایید و انتقال</button>
+{/await}
 
 <style>
 	.header-container {

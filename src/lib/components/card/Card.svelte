@@ -1,30 +1,30 @@
 <script>
-	export let cardNum;
-	export let cardExp;
 	import { fetcher } from '$lib/utils/fetcher';
-	const balanceApi = async () => {
-		const data = await fetcher('/balance');
+	const userWallet = async () => {
+		return fetcher('/wallet');
 	};
-	const getBalance = balanceApi();
+	const getUserWalletRequest = userWallet();
 </script>
 
 <div class="card-container">
-	<div class="card-number">
-		<span>{cardNum}</span>
-	</div>
-	<div class="card-exp">{cardExp} :تاریخ انقضا</div>
-	<div class="balance-title">
-		<span>موجودی :</span>
-	</div>
-	<div class="balance-value">
-		{#await getBalance}
-			loading...
-		{:then data}
-			<span>{data.result.toLocaleString('fa-IR')} ریال</span>
-		{:catch}
-			Error!
-		{/await}
-	</div>
+	{#await getUserWalletRequest}
+		loading...
+	{:then data}
+		<div class="card-number">
+			{#each String(data.cardNum).match(/.{1,4}/g) as numbers}
+				<span>{numbers}</span>
+			{/each}
+		</div>
+		<div class="card-exp">{data.expDate} :تاریخ انقضا</div>
+		<div class="balance-title">
+			<span>موجودی :</span>
+		</div>
+		<div class="balance-value">
+			<span>{data.balance.toLocaleString('fa-IR')} ریال</span>
+		</div>
+	{:catch}
+		Error!
+	{/await}
 </div>
 
 <style>
