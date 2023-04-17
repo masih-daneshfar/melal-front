@@ -24,9 +24,9 @@
 	<div class="content">
 		<p><strong>حساب ریالی</strong></p>
 		{#await getUserWalletRequest}
-		loading...
+			loading...
 		{:then data}
-		<p><span>موجودی : {Number(data.brokerBalance).toLocaleString('fa-IR')}</span></p>
+			<p><span>موجودی : {Number(data.brokerBalance).toLocaleString('fa-IR')}</span></p>
 		{/await}
 	</div>
 </div>
