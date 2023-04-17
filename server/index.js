@@ -4,9 +4,6 @@ import cors from 'cors';
 const app = express();
 const port = 3000;
 app.use(cors());
-// const db = new Database('melal.db', { verbose: console.log });
-
-// app.db.pragma('journal_mode = WAL');
 
 const user = {
 	cardNum: 6062512367493245,
