@@ -8,8 +8,8 @@ app.use(cors());
 const user = {
 	cardNum: 6062512367493245,
 	expDate: '1402/6',
-	balance: 125_525_450,
-	brokerBalance: 150_125_000
+	balance: 125525450,
+	brokerBalance: 1125525450
 };
 let userTransactions = [
 	{ type: 'spend', date: new Date(), fee: 125500000 },

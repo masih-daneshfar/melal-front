@@ -1,5 +1,18 @@
 <script>
+	import { fetcher } from '$lib/utils/fetcher';
 	import BackBtn from '$lib/components/backButton/BackBtn.svelte';
+	import { chargeStore } from '$lib/store/charge.store';
+	import { goto } from '$app/navigation';
+	let amount;
+	const userWallet = async () => {
+		return fetcher('/wallet');
+	};
+	const getUserWalletRequest = userWallet();
+
+	const gotoChargeAmount = () => {
+		chargeStore.set({ ...$chargeStore, amount });
+		goto(`/charge/confirmcharge`, { replaceState: true });
+	};
 </script>
 
 <div class="header-container">
@@ -10,17 +23,21 @@
 	<div class="shape"><span /></div>
 	<div class="content">
 		<p><strong>حساب ریالی</strong></p>
-		<p><span>موجودی : {Number(200_000).toLocaleString('fa-IR')}</span></p>
+		{#await getUserWalletRequest}
+		loading...
+		{:then data}
+		<p><span>موجودی : {Number(data.brokerBalance).toLocaleString('fa-IR')}</span></p>
+		{/await}
 	</div>
 </div>
-<form class="input-container">
+<form class="input-container" on:submit|preventDefault={gotoChargeAmount}>
 	<span>مبلغ مورد نظر :</span>
 	<div class="destcard">
 		<strong>ریال</strong>
-		<input class="feeInp" type="number" pattern="\d*" />
+		<input class="feeInp" type="number" pattern="\d*" bind:value={amount} />
 	</div>
 	<!-- <button type="submit">ادامه</button> -->
-	<a class="primary" href="charge/confirmcharge">ادامه</a>
+	<button class="primary">ادامه</button>
 </form>
 
 <style>
@@ -55,13 +72,15 @@
 		align-items: center;
 		justify-content: center;
 	}
-	.input-container a {
+	.input-container button {
 		padding: 8px 40px;
 		margin-inline: auto;
 		border-radius: 20px;
 		text-decoration: none;
 		color: white;
 		margin-block: 30px;
+		outline: none;
+		border: none;
 	}
 	.feeInp {
 		width: 100%;

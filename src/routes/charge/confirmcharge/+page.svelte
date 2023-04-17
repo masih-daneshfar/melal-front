@@ -1,5 +1,18 @@
 <script>
 	import BackBtn from '$lib/components/backButton/BackBtn.svelte';
+    import { chargeStore } from '$lib/store/charge.store';
+	import { fetcher } from '$lib/utils/fetcher';
+	import { goto } from '$app/navigation';
+
+    let data;
+	chargeStore.subscribe((value) => {
+		data = { ...value };
+	});
+
+    const getChargeConfirmation = async () => {
+		await fetcher('/charge', data);
+		goto('/');
+	};
 </script>
 
 <div class="header-container">
@@ -9,10 +22,10 @@
 <div class="status-container">
     <div class="shape"></div>
     <p>حساب ملل کارت</p>
-    <p class="amount"><span>{Number(200_000).toLocaleString('fa-IR')}</span><span>ریال</span></p>
+    <p class="amount"><span>{Number(data.amount).toLocaleString('fa-IR')}</span><span>ریال</span></p>
 </div>
 <hr/>
-<button>تایید و شارژ</button>
+<button on:click={()=>getChargeConfirmation()}>تایید و شارژ</button>
 
 <style>
 	.header-container {
